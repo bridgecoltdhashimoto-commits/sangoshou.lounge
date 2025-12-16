@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ラウンジ珊瑚礁 | 藤井寺の隠れ家</title>
+    <meta name="description" content="大阪府藤井寺市にある癒やしのラウンジ「珊瑚礁」。若くて可愛いママとアットホームな空間で、心温まるひとときを。セット料金5,000円。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* 深海のようなネイビーと、珊瑚のようなコーラルピンク・ゴールド */
+            --bg-deep: #001529;
+            --text-main: #f0f8ff;
+            --coral-accent: #ff8e7f;
+            --gold-accent: #d4af37;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 142, 127, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Shippori Mincho', 'Zen Old Mincho', serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            /* 海底の光のようなグラデーション */
+            background-image: radial-gradient(circle at 50% 20%, #003366 0%, #000c18 100%);
+            min-height: 100vh;
+        }
+
+        /* アニメーション：揺らめく光（水面効果） */
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+            background: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+            animation: float 20s infinite alternate;
+        }
+        @keyframes float { 0% { transform: scale(1.1); } 100% { transform: scale(1.0); } }
+
+        /* ヘッダー */
+        header {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,21,41,0.9), transparent);
+            backdrop-filter: blur(5px);
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem; color: var(--text-main); letter-spacing: 0.1em;
+        }
+        .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; font-size: 1.2rem; }
+
+        /* ヒーローセクション */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 3rem; margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 142, 127, 0.5);
+            line-height: 1.4;
+        }
+        h1 span { display: block; font-size: 1.2rem; margin-bottom: 15px; color: var(--coral-accent); letter-spacing: 0.3em; }
+
+        .subtitle {
+            font-size: 1rem; color: #ccc; margin-bottom: 50px; line-height: 2;
+        }
+
+        /* コンテンツセクション */
+        section {
+            padding: 100px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center; margin-bottom: 60px;
+            font-size: 2rem; color: var(--gold-accent);
+            font-family: 'Cinzel', serif;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 50px; height: 1px; background: var(--coral-accent); margin: 20px auto 0;
+        }
+
+        /* カードデザイン */
+        .info-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .info-card:hover { transform: translateY(-5px); border-color: var(--gold-accent); }
+
+        .info-card h3 { color: var(--coral-accent); margin-bottom: 20px; font-size: 1.3rem; }
+        .info-card p { line-height: 2; margin-bottom: 15px; }
+
+        /* 料金システム */
+        .price-box {
+            border: 1px solid var(--gold-accent);
+            padding: 20px; margin-top: 20px;
+            color: var(--gold-accent); font-size: 1.5rem; font-family: 'Cinzel', serif;
+        }
+        .price-note { font-size: 0.9rem; color: #aaa; margin-top: 10px; }
+
+        /* アクセスボタン */
+        .btn-map {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: 0.3s;
+            letter-spacing: 0.1em;
+        }
+        .btn-map:hover { background: var(--coral-accent); border-color: var(--coral-accent); color: #fff; }
+
+        /* 電話ボタン（スマホ用固定） */
+        .tel-fixed {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: var(--coral-accent); color: white;
+            padding: 15px 30px; border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(255, 142, 127, 0.4);
+            text-decoration: none; font-weight: bold; letter-spacing: 0.05em;
+            transition: 0.3s;
+        }
+        .tel-fixed:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        /* フッター */
+        footer {
+            text-align: center; padding: 40px; font-size: 0.8rem; color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero { height: 80vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light"></div>
+
+    <header>
+        <div class="brand">Lounge <span>珊瑚礁</span></div>
+    </header>
+
+    <div class="hero">
+        <h1><span>FUJIIDERA HIDEAWAY</span>心安らぐ、<br>深海の隠れ家へ。</h1>
+        <p class="subtitle">
+            アットホームで居心地抜群。<br>
+            若くて優しいママが迎える、<br>
+            藤井寺の癒やしのラウンジ。
+        </p>
+    </div>
+
+    <section>
+        <h2 class="section-title">CONCEPT</h2>
+        <div class="info-card">
+            <h3>「おかえりなさい」と言える場所</h3>
+            <p>
+                藤井寺市野中、外環沿いにある「珊瑚礁」。<br>
+                初めてのお客様でも、まるで常連のように<br>
+                くつろげる温かい雰囲気が自慢です。
+            </p>
+            <p>
+                気取らずに楽しめるアットホームな空間で、<br>
+                個性豊かな女の子たちと、<br>
+                心温まるひとときをお過ごしください。
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">SYSTEM</h2>
+        <div class="info-card">
+            <h3>安心の料金システム</h3>
+            <p>明朗会計で、ごゆっくりお楽しみいただけます。</p>
+            
+            <div class="price-box">
+                SET PRICE ￥5,000
+            </div>
+            <p class="price-note">
+                カード各種ご利用いただけます。<br>
+                営業時間：20:30 ～ 翌1:00<br>
+                定休日：日曜日・祝日
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">ACCESS</h2>
+        <div class="info-card">
+            <h3>Lounge 珊瑚礁</h3>
+            <p>
+                〒583-0014<br>
+                大阪府藤井寺市野中1-262-5<br>
+                （外環状線沿い）
+            </p>
+            <p>
+                近鉄「古市」駅 徒歩10分<br>
+                近鉄「藤井寺」駅 徒歩15分<br>
+                <span style="color: var(--coral-accent);">※送迎サービスあります</span>
+            </p>
+            <a href="https://maps.google.com/?q=大阪府藤井寺市野中1-262-5" target="_blank" class="btn-map">Google Maps →</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Lounge Sangosho. All Rights Reserved.</p>
+    </footer>
+
+    <a href="tel:0729389587" class="tel-fixed">📞 予約・お問い合わせ</a>
+
+</body>
+</html>
