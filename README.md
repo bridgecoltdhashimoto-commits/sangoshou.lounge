@@ -1,1 +1,1 @@
-# sangosyou.lounge
+# sangoshou.lounge
