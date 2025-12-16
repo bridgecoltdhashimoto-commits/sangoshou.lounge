@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruit | ラウンジ珊瑚礁</title>
+    <meta name="description" content="藤井寺市野中のラウンジ珊瑚礁の求人情報。未経験歓迎、ノルマなし、全額日払いOK。女性ドライバーによる送迎あり。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #001529;
+            --text-main: #f0f8ff;
+            --coral-accent: #ff8e7f;
+            --gold-accent: #d4af37;
+            --glass-bg: rgba(0, 21, 41, 0.8);
+            --glass-border: rgba(255, 142, 127, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Shippori Mincho', 'Zen Old Mincho', serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, #003366 0%, #000c18 100%);
+            min-height: 100vh;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,21,41,0.95), transparent);
+            backdrop-filter: blur(5px);
+        }
+
+        .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
+        .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; }
+        
+        nav { display: flex; gap: 20px; }
+        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; font-family: 'Shippori Mincho', serif; transition: 0.3s; }
+        nav a:hover { color: var(--coral-accent); }
+        nav a.active { color: var(--coral-accent); border-bottom: 1px solid var(--coral-accent); }
+
+        .container {
+            padding: 120px 5% 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title { text-align: center; margin-bottom: 50px; }
+        .page-title h1 {
+            font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--gold-accent);
+        }
+        .page-title p { font-size: 1rem; color: var(--coral-accent); }
+
+        /* 画像バナー */
+        .recruit-banner {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* 募集要項テーブル */
+        .recruit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+        .recruit-table th, .recruit-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .recruit-table th {
+            width: 30%;
+            color: var(--coral-accent);
+            font-weight: normal;
+        }
+        .recruit-table td {
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        /* YouTube埋め込み */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+        }
+        .video-wrapper iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* 応募ボタンエリア */
+        .apply-section {
+            text-align: center;
+            background: rgba(255, 142, 127, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--coral-accent);
+            margin-top: 60px;
+        }
+        .apply-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff8e7f, #d4af37);
+            color: #fff;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(255, 142, 127, 0.4);
+            transition: 0.3s;
+        }
+        .apply-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        .tel-link {
+            display: block;
+            font-size: 2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 20px 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* マップボタン */
+        .map-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--coral-accent);
+            text-decoration: underline;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center; padding: 40px; font-size: 0.8rem; color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .recruit-table th, .recruit-table td { display: block; width: 100%; }
+            .recruit-table th { padding-bottom: 5px; color: var(--gold-accent); }
+            .recruit-table td { padding-top: 0; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand"><a href="index.html" style="color:inherit; text-decoration:none;">Lounge <span>珊瑚礁</span></a></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="recruit.html" class="active">Recruit</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-title">
+            <h1>RECRUIT</h1>
+            <p>未経験歓迎♪ ノルマなしで気軽に働ける</p>
+        </div>
+
+        <img src="recruit_banner.jpg" alt="キャスト募集" class="recruit-banner">
+        <img src="recruit_counter.jpg" alt="未経験でも安心" class="recruit-banner">
+
+        <h2 style="text-align: center; color: var(--gold-accent); margin-bottom: 20px;">Introduction Movie</h2>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/JcRGEUEaVuk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <table class="recruit-table">
+            <tr>
+                <th>職種</th>
+                <td>カウンターレディ</td>
+            </tr>
+            <tr>
+                <th>給与</th>
+                <td>
+                    時給 2,000円～<br>
+                    ★各種バック・手当あり（ドリンク・同伴・売上）<br>
+                    ★随時昇給あり
+                </td>
+            </tr>
+            <tr>
+                <th>勤務時間</th>
+                <td>
+                    20:30 ～ 翌1:00<br>
+                    ※営業時間内で応相談、週1回からOK
+                </td>
+            </tr>
+            <tr>
+                <th>資格</th>
+                <td>20歳以上（受動喫煙対策のため）<br>未経験者歓迎、経験者優遇</td>
+            </tr>
+            <tr>
+                <th>待遇</th>
+                <td>
+                    ・全額日払いOK / 週払いOK<br>
+                    ・送りあり / 迎えあり（女性ドライバー）<br>
+                    ・交通費支給<br>
+                    ・貸し服あり / 服装自由<br>
+                    ・お酒が飲めなくてもOK<br>
+                    ・ノルマなし<br>
+                    ・体験入店OK
+                </td>
+            </tr>
+            <tr>
+                <th>勤務地</th>
+                <td>
+                    大阪府藤井寺市野中1-262-5<br>
+                    <a href="https://www.google.com/maps/search/?api=1&query=大阪府藤井寺市野中1-262-5" target="_blank" class="map-btn">📍 Googleマップで見る</a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="apply-section">
+            <h2>ご応募・お問い合わせ</h2>
+            <p>「ヨルナビを見た」とお伝えいただくとスムーズです。<br>24時間受付中！</p>
+            
+            <a href="tel:08079927937" class="tel-link">📞 080-7992-7937</a>
+            <p style="font-size: 0.9rem;">(店舗担当者直通)</p>
+
+            <a href="tel:08079927937" class="apply-btn">電話で応募する</a>
+            
+            <div style="margin-top: 30px;">
+                <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" style="color: #fff; text-decoration: underline;">公式Instagram DMからも受付中</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© Lounge Sangosho. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
