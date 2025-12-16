@@ -11,12 +11,12 @@
     
     <style>
         :root {
-            --bg-deep: #020b16; /* より深い黒に近いネイビー */
+            --bg-deep: #020b16; /* 深海のような漆黒ネイビー */
             --text-main: #f5f5f5;
-            --gold-accent: #c5a059; /* 落ち着いたシャンパンゴールド */
-            --coral-glow: rgba(255, 127, 80, 0.4); /* ほのかな珊瑚の光 */
+            --gold-accent: #c5a059; /* シャンパンゴールド */
+            --coral-glow: rgba(255, 127, 80, 0.3); /* ほのかな珊瑚の光 */
             --glass-panel: rgba(255, 255, 255, 0.03);
-            --border-light: rgba(197, 160, 89, 0.2);
+            --border-light: rgba(197, 160, 89, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,36 +35,32 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
             background: 
                 radial-gradient(circle at 20% 50%, var(--coral-glow) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(197, 160, 89, 0.1) 0%, transparent 40%);
-            animation: pulseGlow 10s infinite alternate;
+                radial-gradient(circle at 80% 20%, rgba(197, 160, 89, 0.15) 0%, transparent 40%);
+            animation: pulseGlow 8s infinite alternate;
         }
-        @keyframes pulseGlow { 0% { opacity: 0.5; } 100% { opacity: 0.8; } }
+        @keyframes pulseGlow { 0% { opacity: 0.4; } 100% { opacity: 0.7; } }
 
         /* ヘッダー */
         header {
             position: fixed; width: 100%; top: 0; z-index: 1000;
-            padding: 25px 5%;
+            padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(2,11,22,0.9), transparent);
-            transition: 0.3s;
+            background: linear-gradient(to bottom, rgba(2,11,22,0.95), transparent);
+            backdrop-filter: blur(5px);
         }
         .brand {
-            font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--text-main);
-            letter-spacing: 0.1em; text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main);
+            letter-spacing: 0.1em;
         }
-        .brand span { color: var(--gold-accent); font-weight: 500; margin-left: 5px; }
+        .brand span { color: var(--gold-accent); margin-left: 5px; }
 
-        nav { display: flex; gap: 30px; }
+        nav { display: flex; gap: 25px; }
         nav a {
-            color: #aaa; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em;
+            color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.1em;
             text-transform: uppercase; transition: 0.4s; position: relative;
         }
         nav a:hover { color: var(--gold-accent); }
-        nav a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
-            background: var(--gold-accent); transition: 0.4s;
-        }
-        nav a:hover::after { width: 100%; }
+        nav a.active { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
 
         /* ヒーローセクション */
         .hero {
@@ -74,35 +70,27 @@
             padding: 0 20px;
             position: relative;
         }
-        .hero::before {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 300px; height: 300px; border: 1px solid var(--border-light);
-            border-radius: 50%; animation: spin 30s linear infinite; opacity: 0.3;
-        }
-
+        
         h1 {
-            font-size: 3.5rem; font-weight: 500; letter-spacing: 0.15em; line-height: 1.4;
-            margin-bottom: 30px; text-shadow: 0 0 30px rgba(0,0,0,0.5);
+            font-size: 3rem; font-weight: 500; letter-spacing: 0.15em; line-height: 1.5;
+            margin-bottom: 30px; text-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
         }
         h1 small {
             display: block; font-size: 1rem; color: var(--gold-accent);
-            letter-spacing: 0.4em; margin-bottom: 15px; font-family: 'Cinzel', serif;
+            letter-spacing: 0.3em; margin-bottom: 20px; font-family: 'Cinzel', serif;
         }
 
         .subtitle {
-            font-size: 0.95rem; line-height: 2.2; color: #ccc; max-width: 600px;
-            margin-bottom: 50px; border-top: 1px solid var(--border-light); padding-top: 30px;
+            font-size: 1rem; line-height: 2.4; color: #ccc; max-width: 600px;
+            margin-bottom: 50px; border-top: 1px solid var(--border-light); padding-top: 40px;
         }
 
         /* セクション共通 */
-        section { padding: 120px 5%; max-width: 900px; margin: 0 auto; text-align: center; }
+        section { padding: 100px 5%; max-width: 900px; margin: 0 auto; text-align: center; }
         .sec-title {
-            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold-accent);
-            letter-spacing: 0.15em; margin-bottom: 50px; position: relative; display: inline-block;
-        }
-        .sec-title::after {
-            content: ''; display: block; width: 40px; height: 1px; background: var(--gold-accent);
-            margin: 15px auto 0;
+            font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold-accent);
+            letter-spacing: 0.1em; margin-bottom: 50px; display: inline-block;
+            border-bottom: 1px solid var(--border-light); padding-bottom: 10px;
         }
 
         /* カード（高級感） */
@@ -111,53 +99,55 @@
             border: 1px solid var(--border-light);
             padding: 60px 40px;
             transition: 0.5s;
+            position: relative;
+        }
+        .luxury-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
         }
         .luxury-card:hover {
             background: rgba(255, 255, 255, 0.05);
-            border-color: var(--gold-accent);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .luxury-card h3 {
-            font-size: 1.4rem; color: var(--text-main); margin-bottom: 25px; font-weight: 500;
+            font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; font-weight: 500;
         }
         .luxury-card p {
-            font-size: 0.95rem; color: #bbb; line-height: 2; margin-bottom: 15px;
+            font-size: 1rem; color: #bbb; line-height: 2; margin-bottom: 15px;
         }
 
         /* 料金表示 */
         .price-display {
-            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold-accent);
-            margin: 30px 0; letter-spacing: 0.05em;
+            font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent);
+            margin: 30px 0; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
         }
-        .price-sub { font-size: 0.8rem; color: #888; font-family: 'Shippori Mincho', serif; }
+        .price-sub { font-size: 0.9rem; color: #888; }
 
         /* ボタン（ゴールド） */
         .btn-gold {
-            display: inline-block; padding: 15px 50px;
+            display: inline-block; padding: 15px 50px; margin-top: 30px;
             border: 1px solid var(--gold-accent); color: var(--gold-accent);
             text-decoration: none; font-size: 0.9rem; letter-spacing: 0.1em;
-            transition: 0.4s; margin-top: 30px; position: relative; overflow: hidden;
+            transition: 0.4s; background: rgba(0,0,0,0.3);
         }
-        .btn-gold:hover { background: var(--gold-accent); color: #000; }
+        .btn-gold:hover { background: var(--gold-accent); color: #020b16; }
 
         /* 電話ボタン固定 */
         .fixed-tel {
             position: fixed; bottom: 30px; right: 30px; z-index: 900;
-            background: var(--gold-accent); color: #020b16;
+            background: linear-gradient(45deg, #c5a059, #e6c585); color: #020b16;
             padding: 15px 30px; border-radius: 50px; text-decoration: none;
-            font-family: 'Cinzel', serif; font-weight: bold;
-            box-shadow: 0 5px 20px rgba(197, 160, 89, 0.3);
-            transition: 0.3s;
+            font-family: 'Cinzel', serif; font-weight: bold; letter-spacing: 0.1em;
+            box-shadow: 0 5px 20px rgba(197, 160, 89, 0.4); transition: 0.3s;
         }
-        .fixed-tel:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(197, 160, 89, 0.5); }
+        .fixed-tel:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
         footer {
             border-top: 1px solid rgba(255,255,255,0.05); padding: 50px;
-            text-align: center; font-size: 0.75rem; color: #555; margin-top: 50px;
+            text-align: center; font-size: 0.75rem; color: #555; margin-top: 80px;
             font-family: 'Cinzel', serif; letter-spacing: 0.1em;
         }
 
-        @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             nav { gap: 15px; }
@@ -171,7 +161,7 @@
     <header>
         <div class="brand">Lounge <span>珊瑚礁</span></div>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="gallery.html">Gallery</a>
             <a href="recruit.html">Recruit</a>
         </nav>
@@ -196,7 +186,7 @@
                 温かなおもてなしが広がる別世界。
             </p>
             <p>
-                初めてのお客様も、懐かしさを感じるような<br>
+                初めてのお客様も、どこか懐かしさを感じる<br>
                 アットホームな雰囲気で皆様をお迎えいたします。
             </p>
         </div>
@@ -209,7 +199,7 @@
             <div class="price-display">SET PRICE ￥5,000</div>
             <p class="price-sub">
                 明朗会計 / 各種カードご利用可<br>
-                20:30 - 25:00 / 日・祝 定休
+                営業時間：20:30 - 25:00 / 定休日：日・祝
             </p>
         </div>
     </section>
@@ -217,10 +207,10 @@
     <section>
         <h2 class="sec-title">ACCESS</h2>
         <div class="luxury-card">
-            <p style="font-size: 1.1rem; color: #fff; margin-bottom: 5px;">Lounge 珊瑚礁</p>
+            <p style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Lounge 珊瑚礁</p>
             <p>大阪府藤井寺市野中1-262-5</p>
-            <p style="font-size: 0.85rem; color: var(--gold-accent);">※無料送迎サービスをご利用いただけます</p>
-            <a href="http://googleusercontent.com/maps.google.com/?q=大阪府藤井寺市野中1-262-5" target="_blank" class="btn-gold">View on Google Maps</a>
+            <p style="font-size: 0.9rem; color: var(--gold-accent); margin-top: 10px;">※無料送迎サービスをご利用いただけます</p>
+            <a href="http://googleusercontent.com/maps.google.com/?q=大阪府藤井寺市野中1-262-5" target="_blank" class="btn-gold">Google Maps</a>
         </div>
     </section>
 
