@@ -9,13 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 共通スタイル（index.htmlと統一） --- */
+        /* --- 共通スタイル --- */
         :root {
             --bg-deep: #001529;
             --text-main: #f0f8ff;
             --coral-accent: #ff8e7f;
             --gold-accent: #d4af37;
-            /* ガラス風の背景色を少し濃くして写真を引き立てる */
             --glass-bg: rgba(0, 21, 41, 0.7);
             --glass-border: rgba(255, 142, 127, 0.3);
         }
@@ -31,7 +30,7 @@
             min-height: 100vh;
         }
 
-        /* アニメーション背景 */
+        /* 背景演出 */
         .ambient-light {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
             background: url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2074&auto=format&fit=crop');
@@ -52,44 +51,36 @@
         .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
         .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; }
         
-        /* ナビゲーション（現在地をハイライト） */
+        /* ナビゲーション */
         nav { display: flex; gap: 20px; }
         nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; font-family: 'Shippori Mincho', serif; transition: 0.3s; }
         nav a:hover { color: var(--coral-accent); }
         nav a.active { color: var(--coral-accent); border-bottom: 1px solid var(--coral-accent); }
 
-        /* メインコンテンツ */
+        /* コンテンツエリア */
         .container {
             padding: 120px 5% 100px;
-            max-width: 1200px; /* 写真を広く見せるため幅を広げる */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .page-title {
-            text-align: center; margin-bottom: 60px;
-        }
+        .page-title { text-align: center; margin-bottom: 60px; }
         .page-title h1 {
             font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; color: var(--gold-accent); letter-spacing: 0.1em;
         }
         .page-title p { letter-spacing: 0.2em; font-size: 0.9rem; }
 
-        .section-header {
-            text-align: center; margin-bottom: 40px; font-size: 1.5rem;
-            color: var(--coral-accent); font-family: 'Shippori Mincho', serif;
-            display: block;
-        }
         .center-wrapper { text-align: center; margin-bottom: 80px; }
 
-        /* --- おしゃれな写真ギャラリー（Masonry風グリッド） --- */
+        /* --- ギャラリー（Masonry風グリッド） --- */
         .masonry-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            grid-auto-rows: 250px; /* 基本の高さを設定 */
-            grid-auto-flow: dense; /* 隙間を埋めるように配置 */
+            grid-auto-rows: 250px;
+            grid-auto-flow: dense;
         }
 
-        /* 縦長・横長の写真を作るクラス */
         .grid-item.wide { grid-column: span 2; }
         .grid-item.tall { grid-row: span 2; }
 
@@ -102,30 +93,21 @@
         }
 
         .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            filter: brightness(0.9); /* 少し暗くして雰囲気を出す */
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s ease;
+            filter: brightness(0.8); /* 夜の雰囲気を出すため少し暗く */
         }
 
-        /* ホバー時のエフェクト */
-        .grid-item:hover img {
-            transform: scale(1.08);
-            filter: brightness(1.1);
-        }
+        .grid-item:hover img { transform: scale(1.08); filter: brightness(1.0); }
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,21,41,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,21,41,0.9), transparent);
             display: flex; align-items: flex-end; padding: 20px;
             opacity: 0; transition: 0.3s;
         }
         .grid-item:hover .overlay { opacity: 1; }
-        .overlay span {
-            color: var(--text-main); font-family: 'Shippori Mincho', serif;
-            font-size: 0.9rem; letter-spacing: 0.1em;
-        }
+        .overlay span { color: var(--text-main); font-family: 'Shippori Mincho', serif; letter-spacing: 0.1em; }
 
         /* Instagramボタン */
         .insta-btn {
@@ -136,11 +118,6 @@
             box-shadow: 0 5px 20px rgba(220, 39, 67, 0.4);
             transition: 0.3s;
         }
-        .insta-btn::before {
-            content: ''; display: inline-block; width: 24px; height: 24px; margin-right: 10px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png') no-repeat center/contain;
-            filter: brightness(0) invert(1); /* アイコンを白くする */
-        }
         .insta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220, 39, 67, 0.6); }
 
         /* フッター */
@@ -149,12 +126,9 @@
             border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;
         }
 
-        /* スマホ対応 */
         @media (max-width: 768px) {
-            .masonry-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .masonry-grid { grid-template-columns: 1fr; }
             .grid-item.wide, .grid-item.tall { grid-column: span 1; grid-row: span 1; }
-            .page-title h1 { font-size: 2rem; }
-            .insta-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -180,32 +154,32 @@
         <div class="center-wrapper">
             <div class="masonry-grid">
                 <div class="grid-item wide">
-                    <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=2070&auto=format&fit=crop" alt="カウンター">
-                    <div class="overlay"><span>落ち着いたカウンター席</span></div>
+                    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=1974&auto=format&fit=crop" alt="Bar Counter">
+                    <div class="overlay"><span>落ち着いたカウンター</span></div>
                 </div>
                 
                 <div class="grid-item tall">
-                    <img src="https://images.unsplash.com/photo-1584225064630-2162355c03f6?q=80&w=1974&auto=format&fit=crop" alt="ボトル">
+                    <img src="https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1974&auto=format&fit=crop" alt="Bottles">
                     <div class="overlay"><span>種類豊富なお酒</span></div>
                 </div>
                 
                 <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1543007354-02803839fb33?q=80&w=2070&auto=format&fit=crop" alt="店内雰囲気">
-                    <div class="overlay"><span>アットホームな空間</span></div>
-                </div>
-                
-                <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop" alt="乾杯">
-                    <div class="overlay"><span>楽しいひとときを</span></div>
-                </div>
-                
-                <div class="grid-item wide">
-                    <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2070&auto=format&fit=crop" alt="カラオケ">
+                    <img src="https://images.unsplash.com/photo-1525253013412-55c1d69a55f2?q=80&w=1974&auto=format&fit=crop" alt="Karaoke">
                     <div class="overlay"><span>カラオケ完備</span></div>
                 </div>
                 
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=1964&auto=format&fit=crop" alt="Whiskey Glass">
+                    <div class="overlay"><span>今夜の一杯</span></div>
+                </div>
+                
+                <div class="grid-item wide">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2070&auto=format&fit=crop" alt="Night Lounge">
+                    <div class="overlay"><span>アットホームな空間</span></div>
+                </div>
+                
                  <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1522158267949-82a7c6b7262c?q=80&w=2070&auto=format&fit=crop" alt="ソファ">
+                    <img src="https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?q=80&w=2069&auto=format&fit=crop" alt="Sofa">
                     <div class="overlay"><span>ゆったりくつろげる</span></div>
                 </div>
             </div>
