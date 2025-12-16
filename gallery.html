@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery & Cast | ラウンジ珊瑚礁</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #001529;
+            --text-main: #f0f8ff;
+            --coral-accent: #ff8e7f;
+            --gold-accent: #d4af37;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 142, 127, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Shippori Mincho', 'Zen Old Mincho', serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, #003366 0%, #000c18 100%);
+            min-height: 100vh;
+        }
+
+        /* アニメーション背景 */
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+            background: url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2074&auto=format&fit=crop');
+            background-size: cover;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,21,41,0.9), transparent);
+            backdrop-filter: blur(5px);
+        }
+
+        .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
+        .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; }
+        
+        nav ul { display: flex; gap: 20px; list-style: none; }
+        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; }
+
+        /* メインコンテンツ */
+        .container {
+            padding: 120px 5% 100px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center; margin-bottom: 80px;
+        }
+        .page-title h1 {
+            font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; color: var(--gold-accent);
+        }
+        .page-title p { letter-spacing: 0.2em; font-size: 0.9rem; }
+
+        /* セクション共通 */
+        .section-header {
+            text-align: center; margin-bottom: 50px; font-size: 1.8rem;
+            color: var(--coral-accent); font-family: 'Shippori Mincho', serif;
+            border-bottom: 1px solid rgba(255, 142, 127, 0.3);
+            display: inline-block; padding-bottom: 10px;
+        }
+        .center-wrapper { text-align: center; margin-bottom: 100px; }
+
+        /* キャスト紹介グリッド */
+        .cast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .cast-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .cast-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 142, 127, 0.2);
+            border-color: var(--gold-accent);
+        }
+
+        .cast-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            /* ここに実際のキャスト写真が入ると素敵です */
+            filter: brightness(0.9);
+        }
+
+        .cast-info { padding: 20px; }
+        .cast-name { font-size: 1.2rem; color: var(--text-main); margin-bottom: 5px; font-weight: bold; }
+        .cast-role { font-size: 0.8rem; color: var(--coral-accent); margin-bottom: 10px; display: block; }
+        .cast-desc { font-size: 0.85rem; color: #ccc; line-height: 1.6; text-align: left; }
+
+        /* 雰囲気ギャラリー（Instagram風レイアウト） */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 1 / 1; /* 正方形にする */
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.5s;
+        }
+        
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transition: 0.3s;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+        .overlay p { color: white; font-family: 'Shippori Mincho', serif; }
+
+        /* Instagramボタン */
+        .insta-btn {
+            display: inline-block; margin-top: 40px;
+            padding: 15px 40px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white; border-radius: 50px; text-decoration: none;
+            font-weight: bold; letter-spacing: 0.1em;
+            box-shadow: 0 5px 20px rgba(220, 39, 67, 0.4);
+            transition: 0.3s;
+        }
+        .insta-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        /* フッター */
+        footer {
+            text-align: center; padding: 40px; font-size: 0.8rem; color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .cast-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .cast-img { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light"></div>
+
+    <header>
+        <div class="brand"><a href="index.html" style="color:inherit; text-decoration:none;">Lounge <span>珊瑚礁</span></a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" style="color: var(--coral-accent);">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-title">
+            <h1>Cast & Gallery</h1>
+            <p>店内の雰囲気と、素敵なキャストたち</p>
+        </div>
+
+        <div class="center-wrapper">
+            <h2 class="section-header">CAST</h2>
+            
+            <div class="cast-grid">
+                <div class="cast-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" alt="Mama" class="cast-img">
+                    <div class="cast-info">
+                        <div class="cast-name">ママ</div>
+                        <span class="cast-role">Owner Mama</span>
+                        <p class="cast-desc">
+                            「珊瑚礁」へようこそ。<br>
+                            初めての方も、実家に帰ってきたようにくつろいでくださいね。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cast-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976&auto=format&fit=crop" alt="Cast" class="cast-img">
+                    <div class="cast-info">
+                        <div class="cast-name">Yuki</div>
+                        <span class="cast-role">Cast</span>
+                        <p class="cast-desc">
+                            お酒と会話が大好きです。<br>
+                            一緒に楽しい時間を過ごしましょう♪
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cast-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop" alt="Cast" class="cast-img">
+                    <div class="cast-info">
+                        <div class="cast-name">Mika</div>
+                        <span class="cast-role">Cast</span>
+                        <p class="cast-desc">
+                            癒やしのキャラと言われます。<br>
+                            歌うのも好きなのでリクエストしてね！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-wrapper">
+            <h2 class="section-header">ATMOSPHERE</h2>
+            <p style="margin-bottom: 30px;">営業中の店内の様子です</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=2070&auto=format&fit=crop" alt="Interior">
+                    <div class="overlay"><p>落ち着いた店内</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop" alt="Drinks">
+                    <div class="overlay"><p>豊富なお酒</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop" alt="Party">
+                    <div class="overlay"><p>楽しい夜</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2070&auto=format&fit=crop" alt="Karaoke">
+                    <div class="overlay"><p>カラオケ完備</p></div>
+                </div>
+            </div>
+
+            <a href="https://www.instagram.com/lounge_sangosyou/" target="_blank" class="insta-btn">
+                公式 Instagram を見る
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© Lounge Sangosho. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
