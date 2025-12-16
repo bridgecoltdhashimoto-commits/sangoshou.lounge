@@ -9,37 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 共通スタイル --- */
         :root {
             --bg-deep: #001529;
             --text-main: #f0f8ff;
             --coral-accent: #ff8e7f;
             --gold-accent: #d4af37;
-            --glass-bg: rgba(0, 21, 41, 0.7);
-            --glass-border: rgba(255, 142, 127, 0.3);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Shippori Mincho', 'Zen Old Mincho', serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
-            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 20%, #003366 0%, #000c18 100%);
             min-height: 100vh;
         }
-
-        /* 背景演出 */
-        .ambient-light {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
-            background: url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2074&auto=format&fit=crop');
-            background-size: cover;
-            opacity: 0.15;
-            mix-blend-mode: overlay;
-        }
-
-        /* ヘッダー */
         header {
             position: fixed; width: 100%; top: 0; z-index: 1000;
             padding: 20px 5%;
@@ -47,152 +30,66 @@
             background: linear-gradient(to bottom, rgba(0,21,41,0.9), transparent);
             backdrop-filter: blur(5px);
         }
-
         .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
         .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; }
-        
         nav { display: flex; gap: 20px; }
-        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; font-family: 'Shippori Mincho', serif; transition: 0.3s; }
+        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--coral-accent); }
         nav a.active { color: var(--coral-accent); border-bottom: 1px solid var(--coral-accent); }
 
-        /* コンテンツエリア */
         .container {
             padding: 120px 5% 100px;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .page-title { text-align: center; margin-bottom: 60px; }
-        .page-title h1 {
-            font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 15px; color: var(--gold-accent); letter-spacing: 0.1em;
-        }
-        .page-title p { letter-spacing: 0.2em; font-size: 0.9rem; }
-
-        .center-wrapper { text-align: center; margin-bottom: 80px; }
-
-        /* --- ギャラリー（Masonry風グリッド） --- */
-        .masonry-grid {
+        .page-title h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); }
+        
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            grid-auto-rows: 250px;
-            grid-auto-flow: dense;
         }
-
-        .grid-item.wide { grid-column: span 2; }
-        .grid-item.tall { grid-row: span 2; }
-
         .grid-item {
             position: relative;
+            border-radius: 8px;
             overflow: hidden;
-            border-radius: 4px;
             border: 1px solid rgba(255,255,255,0.1);
-            background: #000;
         }
-
         .grid-item img {
             width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.8s ease;
-            filter: brightness(0.8);
+            transition: transform 0.5s;
         }
-
-        .grid-item:hover img { transform: scale(1.08); filter: brightness(1.0); }
-
-        .overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,21,41,0.9), transparent);
-            display: flex; align-items: flex-end; padding: 20px;
-            opacity: 0; transition: 0.3s;
-        }
-        .grid-item:hover .overlay { opacity: 1; }
-        .overlay span { color: var(--text-main); font-family: 'Shippori Mincho', serif; letter-spacing: 0.1em; }
-
-        /* Instagramボタン */
-        .insta-btn {
-            display: inline-flex; align-items: center; margin-top: 50px;
-            padding: 15px 40px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white; border-radius: 50px; text-decoration: none;
-            font-weight: bold; letter-spacing: 0.1em;
-            box-shadow: 0 5px 20px rgba(220, 39, 67, 0.4);
-            transition: 0.3s;
-        }
-        .insta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220, 39, 67, 0.6); }
-
-        /* フッター */
-        footer {
-            text-align: center; padding: 40px; font-size: 0.8rem; color: #666;
-            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;
-        }
-
-        @media (max-width: 768px) {
-            .masonry-grid { grid-template-columns: 1fr; }
-            .grid-item.wide, .grid-item.tall { grid-column: span 1; grid-row: span 1; }
-        }
+        .grid-item:hover img { transform: scale(1.05); }
+        
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #666; margin-top: 50px; }
     </style>
 </head>
 <body>
-
-    <div class="ambient-light"></div>
-
     <header>
         <div class="brand"><a href="index.html" style="color:inherit; text-decoration:none;">Lounge <span>珊瑚礁</span></a></div>
         <nav>
             <a href="index.html">Home</a>
             <a href="gallery.html" class="active">Gallery</a>
+            <a href="recruit.html">Recruit</a>
         </nav>
     </header>
 
     <div class="container">
-        
         <div class="page-title">
             <h1>GALLERY</h1>
-            <p>珊瑚礁の夜、癒やしの空間。</p>
+            <p>店内の雰囲気</p>
         </div>
 
-        <div class="center-wrapper">
-            <div class="masonry-grid">
-                <div class="grid-item wide">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="カウンター">
-                    <div class="overlay"><span>落ち着いたカウンター</span></div>
-                </div>
-                
-                <div class="grid-item tall">
-                    <img src="https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1974&auto=format&fit=crop" alt="ボトル">
-                    <div class="overlay"><span>種類豊富なお酒</span></div>
-                </div>
-                
-                <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1525253013412-55c1d69a55f2?q=80&w=1974&auto=format&fit=crop" alt="カラオケ">
-                    <div class="overlay"><span>カラオケ完備</span></div>
-                </div>
-                
-                <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=1964&auto=format&fit=crop" alt="Whiskey Glass">
-                    <div class="overlay"><span>今夜の一杯</span></div>
-                </div>
-                
-                <div class="grid-item wide">
-                    <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=2070&auto=format&fit=crop" alt="Making Drink">
-                    <div class="overlay"><span>心を込めたおもてなし</span></div>
-                </div>
-                
-                 <div class="grid-item">
-                    <img src="https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?q=80&w=2069&auto=format&fit=crop" alt="Sofa">
-                    <div class="overlay"><span>ゆったりくつろげる</span></div>
-                </div>
-            </div>
-
-            <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="insta-btn">
-                公式 Instagram を見る
-            </a>
+        <div class="gallery-grid">
+            <div class="grid-item"><img src="counter_main.jpg" alt="落ち着いたカウンター"></div>
+            <div class="grid-item"><img src="bottles.jpg" alt="豊富なボトル"></div>
+            <div class="grid-item"><img src="counter_side.jpg" alt="店内の様子"></div>
+            <div class="grid-item"><img src="signboard.jpg" alt="看板"></div>
+            <div class="grid-item"><img src="cast_girls.jpg" alt="楽しい雰囲気"></div>
         </div>
-
     </div>
 
-    <footer>
-        <p>© Lounge Sangosho. All Rights Reserved.</p>
-    </footer>
-
+    <footer><p>© Lounge Sangosho. All Rights Reserved.</p></footer>
 </body>
 </html>
