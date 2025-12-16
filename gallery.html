@@ -103,7 +103,7 @@
             width: 100%;
             height: 250px;
             object-fit: cover;
-            /* ここに実際のキャスト写真が入ると素敵です */
+            /* 仮画像：後で実際の写真に入れ替えてください */
             filter: brightness(0.9);
         }
 
@@ -123,7 +123,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            aspect-ratio: 1 / 1; /* 正方形にする */
+            aspect-ratio: 1 / 1;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -172,11 +172,9 @@
 
     <header>
         <div class="brand"><a href="index.html" style="color:inherit; text-decoration:none;">Lounge <span>珊瑚礁</span></a></div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="gallery.html" style="color: var(--coral-accent);">Gallery</a></li>
-            </ul>
+        <nav style="display: flex; gap: 20px;">
+            <a href="index.html" style="color: #ddd; text-decoration: none;">Home</a>
+            <a href="gallery.html" style="color: var(--coral-accent); text-decoration: none;">Gallery & Cast</a>
         </nav>
     </header>
 
@@ -252,7 +250,7 @@
                 </div>
             </div>
 
-            <a href="https://www.instagram.com/lounge_sangosyou/" target="_blank" class="insta-btn">
+            <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="insta-btn">
                 公式 Instagram を見る
             </a>
         </div>
