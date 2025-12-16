@@ -3,66 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | ラウンジ珊瑚礁</title>
+    <title>Gallery | Lounge 珊瑚礁</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Zen+Old+Mincho:wght@400;700&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-deep: #001529;
-            --text-main: #f0f8ff;
-            --coral-accent: #ff8e7f;
-            --gold-accent: #d4af37;
+            --bg-deep: #020b16;
+            --text-main: #f5f5f5;
+            --gold-accent: #c5a059;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(197, 160, 89, 0.2);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Shippori Mincho', 'Zen Old Mincho', serif;
+            font-family: 'Shippori Mincho', serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
-            background-image: radial-gradient(circle at 50% 20%, #003366 0%, #000c18 100%);
             min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 10%, #0d1b2a 0%, #000 100%);
         }
+
         header {
             position: fixed; width: 100%; top: 0; z-index: 1000;
-            padding: 20px 5%;
+            padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(0,21,41,0.9), transparent);
-            backdrop-filter: blur(5px);
+            background: linear-gradient(to bottom, rgba(2,11,22,0.9), transparent);
         }
-        .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
-        .brand span { color: var(--coral-accent); font-family: 'Shippori Mincho', serif; }
-        nav { display: flex; gap: 20px; }
-        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { color: var(--coral-accent); }
-        nav a.active { color: var(--coral-accent); border-bottom: 1px solid var(--coral-accent); }
+        .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--text-main); }
+        .brand span { color: var(--gold-accent); margin-left: 5px; }
+        nav { display: flex; gap: 30px; }
+        nav a { color: #888; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--gold-accent); }
 
-        .container {
-            padding: 120px 5% 100px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .page-title { text-align: center; margin-bottom: 60px; }
-        .page-title h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); }
+        .container { padding: 150px 5% 100px; max-width: 1200px; margin: 0 auto; }
         
+        .page-head { text-align: center; margin-bottom: 80px; }
+        .page-head h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); letter-spacing: 0.2em; font-weight: 400; }
+        .page-head p { font-size: 0.9rem; color: #888; margin-top: 15px; letter-spacing: 0.1em; }
+
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        .grid-item {
+        .photo-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            transition: 0.5s ease;
+        }
+        .photo-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .img-box {
+            width: 100%; height: 250px; overflow: hidden;
             position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .grid-item img {
+        .img-box img {
             width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s;
+            transition: 0.8s; filter: grayscale(30%);
         }
-        .grid-item:hover img { transform: scale(1.05); }
-        
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #666; margin-top: 50px; }
+        .photo-card:hover img { transform: scale(1.1); filter: grayscale(0%); }
+
+        .insta-link {
+            display: block; text-align: center; margin-top: 80px;
+        }
+        .btn-insta {
+            display: inline-block; padding: 15px 40px;
+            background: transparent; border: 1px solid #fff; color: #fff;
+            text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 0.1em;
+            transition: 0.3s;
+        }
+        .btn-insta:hover { background: #fff; color: #000; }
+
+        footer { text-align: center; padding: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: #444; font-size: 0.75rem; font-family: 'Cinzel', serif; }
     </style>
 </head>
 <body>
@@ -76,20 +93,24 @@
     </header>
 
     <div class="container">
-        <div class="page-title">
-            <h1>GALLERY</h1>
-            <p>店内の雰囲気</p>
+        <div class="page-head">
+            <h1>ATMOSPHERE</h1>
+            <p>宝石のような輝きと、癒やしの時間</p>
         </div>
 
         <div class="gallery-grid">
-            <div class="grid-item"><img src="counter_main.jpg" alt="落ち着いたカウンター"></div>
-            <div class="grid-item"><img src="bottles.jpg" alt="豊富なボトル"></div>
-            <div class="grid-item"><img src="counter_side.jpg" alt="店内の様子"></div>
-            <div class="grid-item"><img src="signboard.jpg" alt="看板"></div>
-            <div class="grid-item"><img src="cast_girls.jpg" alt="楽しい雰囲気"></div>
+            <div class="photo-card"><div class="img-box"><img src="counter_main.jpg" alt="Counter"></div></div>
+            <div class="photo-card"><div class="img-box"><img src="bottles.jpg" alt="Bottles"></div></div>
+            <div class="photo-card"><div class="img-box"><img src="counter_side.jpg" alt="Interior"></div></div>
+            <div class="photo-card"><div class="img-box"><img src="signboard.jpg" alt="Sign"></div></div>
+            <div class="photo-card"><div class="img-box"><img src="cast_girls.jpg" alt="Staff"></div></div>
+            </div>
+
+        <div class="insta-link">
+            <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-insta">VISIT INSTAGRAM</a>
         </div>
     </div>
 
-    <footer><p>© Lounge Sangosho. All Rights Reserved.</p></footer>
+    <footer><p>© 2025 Lounge Sangosho.</p></footer>
 </body>
 </html>
