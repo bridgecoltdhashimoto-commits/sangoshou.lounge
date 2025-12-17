@@ -4,115 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lounge 珊瑚礁 | 藤井寺の隠れ家</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #000810;
-            --text-main: #f0f8ff;
-            --gold-accent: #d4af37;
-            --glass-panel: rgba(255, 255, 255, 0.03);
-            --border-light: rgba(212, 175, 55, 0.3);
+            --bg-deep: #000510;
+            --neon-gold: #ffd700;
+            --neon-blue: #00ffff;
+            --neon-pink: #ff00ff;
+            --glass: rgba(255, 255, 255, 0.05);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Shippori Mincho', serif;
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            overflow-x: hidden;
-            background: radial-gradient(circle at bottom, #0b1a2a 0%, #000000 100%);
-            min-height: 100vh;
+            background: radial-gradient(circle at bottom, #001f3f, #000000);
+            color: #fff; font-family: 'Shippori Mincho', serif; overflow-x: hidden; min-height: 100vh;
         }
-        .ocean-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
+        
+        /* 深海アニメーション */
+        .bubbles { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; pointer-events: none; }
         .bubble {
-            position: absolute; bottom: -100px;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
-            border-radius: 50%;
-            animation: rise 15s infinite ease-in;
-            opacity: 0;
+            position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%; animation: rise 10s infinite ease-in;
         }
+        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 8s; }
+        .bubble:nth-child(2) { width: 20px; height: 20px; left: 20%; animation-duration: 5s; animation-delay: 1s; }
+        .bubble:nth-child(3) { width: 50px; height: 50px; left: 35%; animation-duration: 10s; animation-delay: 2s; }
+        .bubble:nth-child(4) { width: 80px; height: 80px; left: 50%; animation-duration: 11s; animation-delay: 0s; }
+        .bubble:nth-child(5) { width: 35px; height: 35px; left: 55%; animation-duration: 6s; animation-delay: 1s; }
+        .bubble:nth-child(6) { width: 45px; height: 45px; left: 65%; animation-duration: 8s; animation-delay: 3s; }
+        .bubble:nth-child(7) { width: 25px; height: 25px; left: 70%; animation-duration: 12s; animation-delay: 2s; }
+        .bubble:nth-child(8) { width: 80px; height: 80px; left: 80%; animation-duration: 6s; animation-delay: 2s; }
         @keyframes rise {
-            0% { bottom: -100px; transform: translateX(0) scale(0.5); opacity: 0; }
-            50% { opacity: 0.6; }
-            100% { bottom: 120%; transform: translateX(20px) scale(1); opacity: 0; }
+            0% { bottom: -100px; transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { bottom: 100vh; transform: translateX(-100px); opacity: 0; }
         }
+
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            padding: 20px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(0,8,16,0.9), transparent);
+            background: rgba(0,0,0,0.8); border-bottom: 1px solid var(--neon-blue);
         }
-        .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-main); }
-        .brand span { color: var(--gold-accent); margin-left: 5px; }
+        .brand { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--neon-gold); text-shadow: 0 0 10px var(--neon-gold); }
         nav { display: flex; gap: 20px; }
-        nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { color: var(--gold-accent); }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 0 20px;
         }
-        h1 { font-size: 3rem; margin-bottom: 20px; }
-        h1 small { display: block; font-size: 1rem; color: var(--gold-accent); font-family: 'Cinzel', serif; letter-spacing: 0.3em; margin-bottom: 20px; }
-        .subtitle { font-size: 1rem; line-height: 2; color: #ccc; max-width: 600px; margin-bottom: 40px; border-top: 1px solid var(--border-light); padding-top: 40px; }
-        section { padding: 100px 5%; max-width: 900px; margin: 0 auto; text-align: center; }
-        .sec-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold-accent); margin-bottom: 40px; }
-        .luxury-card {
-            background: var(--glass-panel); border: 1px solid var(--border-light);
-            padding: 50px; margin-bottom: 40px; transition: 0.5s;
+        h1 {
+            font-size: 3.5rem; font-family: 'Cinzel', serif; margin-bottom: 20px;
+            color: #fff; text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
         }
-        .price-display { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); margin: 30px 0; }
-        .btn-gold {
-            display: inline-block; padding: 15px 40px; border: 1px solid var(--gold-accent);
-            color: var(--gold-accent); text-decoration: none; transition: 0.3s;
+        .subtitle {
+            font-size: 1.2rem; line-height: 2; margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
-        .fixed-tel {
-            position: fixed; bottom: 30px; right: 30px; z-index: 900;
-            background: linear-gradient(45deg, #d4af37, #f2d06b); color: #000;
-            padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold;
+
+        section { padding: 100px 5%; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .card {
+            background: var(--glass); border: 2px solid var(--neon-blue);
+            padding: 40px; margin-bottom: 40px; border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
-        footer { text-align: center; padding: 50px; font-size: 0.8rem; color: #666; }
+        .card h2 { color: var(--neon-gold); font-family: 'Cinzel', serif; margin-bottom: 20px; font-size: 2rem; }
+        .price { font-size: 2.5rem; color: var(--neon-pink); font-weight: bold; text-shadow: 0 0 10px var(--neon-pink); }
+        
+        .btn {
+            display: inline-block; padding: 15px 40px; margin-top: 20px;
+            background: transparent; border: 2px solid var(--neon-gold); color: var(--neon-gold);
+            text-decoration: none; font-weight: bold; font-size: 1.1rem;
+            box-shadow: 0 0 10px var(--neon-gold); transition: 0.3s;
+        }
+        .btn:hover { background: var(--neon-gold); color: #000; box-shadow: 0 0 30px var(--neon-gold); }
+
+        footer { text-align: center; padding: 50px; color: #888; }
     </style>
 </head>
 <body>
-    <div class="ocean-container">
-        <div class="bubble" style="left: 10%; width: 20px; height: 20px; animation-duration: 12s;"></div>
-        <div class="bubble" style="left: 30%; width: 15px; height: 15px; animation-duration: 18s;"></div>
-        <div class="bubble" style="left: 70%; width: 25px; height: 25px; animation-duration: 15s;"></div>
-        <div class="bubble" style="left: 90%; width: 10px; height: 10px; animation-duration: 20s;"></div>
+    <div class="bubbles">
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
     </div>
+
     <header>
-        <div class="brand">Lounge <span>珊瑚礁</span></div>
+        <div class="brand">Lounge 珊瑚礁</div>
         <nav>
             <a href="index.html">Home</a>
             <a href="gallery.html">Gallery</a>
             <a href="recruit.html">Recruit</a>
         </nav>
     </header>
+
     <div class="hero">
-        <h1><small>JEWEL OF THE SEA</small>心安らぐ、<br>深海の隠れ家。</h1>
-        <p class="subtitle">珊瑚礁は、海の宝石。<br>静寂と安らぎに満ちた、大人のための上質な空間。</p>
+        <h1>JEWEL OF THE SEA</h1>
+        <p class="subtitle">深海に輝く、大人の隠れ家。<br>幻想的な空間で、心ゆくまで。</p>
     </div>
+
     <section>
-        <h2 class="sec-title">SYSTEM</h2>
-        <div class="luxury-card">
-            <h3>安心の料金システム</h3>
-            <div class="price-display">SET PRICE ￥5,000</div>
-            <p>営業時間：20:30 - 翌1:00 / 定休日：日・祝</p>
+        <div class="card">
+            <h2>SYSTEM</h2>
+            <p>安心の料金システム</p>
+            <div class="price">SET PRICE ￥5,000</div>
+            <p>20:30 - 25:00 / 日・祝 定休</p>
         </div>
-    </section>
-    <section>
-        <h2 class="sec-title">ACCESS</h2>
-        <div class="luxury-card">
+
+        <div class="card">
+            <h2>ACCESS</h2>
             <p>大阪府藤井寺市野中1-262-5</p>
-            <a href="http://googleusercontent.com/maps.google.com/?q=大阪府藤井寺市野中1-262-5" target="_blank" class="btn-gold">Google Maps</a>
+            <p>※無料送迎サービスあり</p>
+            <a href="http://googleusercontent.com/maps.google.com/?q=大阪府藤井寺市野中1-262-5" target="_blank" class="btn">Google Maps</a>
         </div>
     </section>
+
     <footer><p>© 2025 Lounge Sangosho.</p></footer>
-    <a href="tel:08079927937" class="fixed-tel">📞 RESERVE</a>
 </body>
 </html>
