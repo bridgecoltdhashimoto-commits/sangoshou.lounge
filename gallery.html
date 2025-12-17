@@ -10,11 +10,11 @@
     
     <style>
         :root {
-            --bg-deep: #020b16;
+            --bg-deep: #000810;
             --text-main: #f5f5f5;
-            --gold-accent: #c5a059;
+            --gold-accent: #d4af37;
             --glass-bg: rgba(255, 255, 255, 0.02);
-            --border-color: rgba(197, 160, 89, 0.25);
+            --border-color: rgba(212, 175, 55, 0.3);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -22,25 +22,44 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
-            background-image: radial-gradient(circle at 50% 10%, #0d1b2a 0%, #000 100%);
+            background: radial-gradient(circle at bottom, #0b1a2a 0%, #000000 100%);
+            position: relative; overflow-x: hidden;
+        }
+
+        /* 深海アニメーション */
+        .ocean-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none; overflow: hidden;
+        }
+        .bubble {
+            position: absolute; bottom: -100px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            animation: rise var(--duration) infinite ease-in;
+            opacity: 0;
+        }
+        @keyframes rise {
+            0% { bottom: -100px; transform: translateX(0) scale(0.5); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { bottom: 120%; transform: translateX(var(--sway)) scale(1); opacity: 0; }
         }
 
         header {
             position: fixed; width: 100%; top: 0; z-index: 1000;
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(2,11,22,0.95), transparent);
+            background: linear-gradient(to bottom, rgba(0,8,16,0.9), transparent);
         }
         .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--text-main); }
         .brand span { color: var(--gold-accent); margin-left: 5px; }
         nav { display: flex; gap: 25px; }
         nav a { color: #888; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--gold-accent); }
+        nav a:hover, nav a.active { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
 
         .container { padding: 150px 5% 100px; max-width: 1200px; margin: 0 auto; }
         
         .page-head { text-align: center; margin-bottom: 80px; }
-        .page-head h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); letter-spacing: 0.15em; font-weight: 400; }
+        .page-head h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-accent); letter-spacing: 0.15em; text-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
         .page-head p { font-size: 0.95rem; color: #999; margin-top: 15px; letter-spacing: 0.1em; }
 
         .gallery-grid {
@@ -52,14 +71,15 @@
             border: 1px solid var(--border-color);
             padding: 10px;
             transition: 0.5s ease;
+            backdrop-filter: blur(2px);
         }
         .photo-card:hover {
             border-color: var(--gold-accent);
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(197, 160, 89, 0.1);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
         }
         .img-box {
-            width: 100%; height: 250px; overflow: hidden;
+            width: 100%; height: 300px; overflow: hidden;
             position: relative;
         }
         .img-box img {
@@ -68,26 +88,35 @@
         }
         .photo-card:hover img { transform: scale(1.05); filter: brightness(1.1); }
 
-        .insta-link {
-            display: block; text-align: center; margin-top: 80px;
-        }
+        .insta-link { display: block; text-align: center; margin-top: 80px; }
         .btn-insta {
             display: inline-block; padding: 18px 50px;
-            background: transparent; border: 1px solid #fff; color: #fff;
+            background: rgba(255,255,255,0.05); border: 1px solid #fff; color: #fff;
             text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 0.1em;
             transition: 0.3s;
         }
-        .btn-insta:hover { background: #fff; color: #000; }
+        .btn-insta:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.5); }
 
         footer { text-align: center; padding: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: #444; font-size: 0.75rem; font-family: 'Cinzel', serif; }
     </style>
 </head>
 <body>
+    
+    <div class="ocean-container">
+        <div class="bubble" style="left: 10%; width: 20px; height: 20px; --duration: 15s; --sway: 30px;"></div>
+        <div class="bubble" style="left: 20%; width: 10px; height: 10px; --duration: 25s; --sway: -20px;"></div>
+        <div class="bubble" style="left: 35%; width: 30px; height: 30px; --duration: 18s; --sway: 40px;"></div>
+        <div class="bubble" style="left: 50%; width: 15px; height: 15px; --duration: 22s; --sway: -30px;"></div>
+        <div class="bubble" style="left: 65%; width: 25px; height: 25px; --duration: 20s; --sway: 25px;"></div>
+        <div class="bubble" style="left: 80%; width: 12px; height: 12px; --duration: 28s; --sway: -15px;"></div>
+        <div class="bubble" style="left: 90%; width: 40px; height: 40px; --duration: 12s; --sway: 50px;"></div>
+    </div>
+
     <header>
         <div class="brand"><a href="index.html" style="color:inherit; text-decoration:none;">Lounge <span>珊瑚礁</span></a></div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="gallery.html" class="active">Gallery</a>
+            <a href="gallery.html" class="active" style="color: var(--gold-accent);">Gallery</a>
             <a href="recruit.html">Recruit</a>
         </nav>
     </header>
