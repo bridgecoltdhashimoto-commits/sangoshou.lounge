@@ -11,27 +11,38 @@
             --pink-light: #ffb7b2;
             --glass-bg: rgba(20, 25, 40, 0.85); --border-gold: rgba(212, 175, 55, 0.4);
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0; padding: 0; font-family: 'Shippori Mincho', serif;
+            font-family: 'Shippori Mincho', serif;
             background-color: var(--bg-deep); color: var(--text-main);
             background-image: radial-gradient(circle at 50% 10%, #0f1c30 0%, #000 90%);
             min-height: 100vh; overflow-x: hidden;
         }
+
+        /* ヘッダー（はみ出し防止・自動折り返し対応） */
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 15px 5%;
+            position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
+            padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(5,8,16,0.95), rgba(5,8,16,0.8));
+            flex-wrap: wrap; /* 重要 */
+            background: linear-gradient(to bottom, rgba(5,8,16,0.95), rgba(5,8,16,0.9));
             border-bottom: 1px solid rgba(212,175,55,0.3);
+            transition: 0.3s;
         }
         .brand {
             font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 0.1em;
-            color: var(--gold-light);
+            color: var(--gold-light); white-space: nowrap; margin-right: auto;
         }
-        nav { display: flex; gap: 20px; }
-        nav a { color: #ccc; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
-        nav a:hover { color: var(--gold-light); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        nav a {
+            color: #ccc; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em;
+            transition: 0.3s; white-space: nowrap;
+        }
+        nav a:hover, nav a.active { color: var(--gold-light); border-bottom: 1px solid var(--gold-light); }
 
-        .container { padding: 120px 5% 100px; max-width: 800px; margin: 0 auto; text-align: center; }
+        /* コンテンツ */
+        .container { padding: 160px 5% 100px; max-width: 800px; margin: 0 auto; text-align: center; }
+        
         h1 {
             font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 40px;
             background: linear-gradient(to right, var(--gold-light), var(--gold-main));
@@ -70,13 +81,31 @@
         .btn:hover { transform: translateY(-3px); opacity: 0.9; }
         
         footer { text-align: center; padding: 50px; color: #666; font-size: 0.8rem; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* 幅が狭くなった時の調整 */
+        @media (max-width: 950px) {
+            header { justify-content: center; gap: 15px; }
+            .brand { margin-right: 0; margin-bottom: 10px; width: 100%; text-align: center; }
+            nav { width: 100%; justify-content: center; }
+            .container { padding-top: 180px; }
+            
+            .catch strong { font-size: 1.2rem; }
+            th, td { display: block; width: 100%; }
+            th { padding-bottom: 5px; color: var(--gold-light); }
+            td { padding-top: 0; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="brand">Lounge <span>珊瑚礁</span></div>
-        <nav><a href="index.html">Home</a><a href="gallery.html">Gallery</a><a href="recruit.html">Recruit</a></nav>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="recruit.html" class="active">Recruit</a>
+        </nav>
     </header>
+
     <div class="container">
         <h1>RECRUIT</h1>
         <div class="video-box"><iframe src="https://www.youtube.com/embed/JcRGEUEaVuk" frameborder="0" allowfullscreen></iframe></div>
