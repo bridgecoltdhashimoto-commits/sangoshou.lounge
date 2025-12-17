@@ -7,40 +7,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #050a14; --text-main: #f0f0f0; --gold-light: #e6c585;
-            --glass-bg: rgba(10, 15, 30, 0.85); --border-gold: rgba(230, 197, 133, 0.3);
+            --bg-deep: #050a14; --text-main: #f0f0f0; --gold-light: #f3e5ab; --gold-main: #d4af37;
+            --glass-bg: rgba(10, 15, 30, 0.85); --border-gold: rgba(212, 175, 55, 0.4);
         }
         body {
             margin: 0; padding: 0; font-family: 'Shippori Mincho', serif;
             background-color: var(--bg-deep); color: var(--text-main);
             background-image: radial-gradient(circle at 50% 10%, #0f1c30 0%, #000 90%);
-            min-height: 100vh;
+            min-height: 100vh; overflow-x: hidden;
         }
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 20px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
             background: linear-gradient(to bottom, rgba(5,10,20,0.95), transparent);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
         }
-        .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-light); }
+        .brand {
+            font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 0.1em;
+            background: linear-gradient(to right, #fff, var(--gold-main), #fff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
         nav { display: flex; gap: 20px; }
         nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--gold-light); }
-        .container { padding: 150px 5% 100px; max-width: 800px; margin: 0 auto; }
-        h1 { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 2.5rem; text-align: center; margin-bottom: 40px; }
-        .video-box { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 40px; border: 1px solid var(--border-gold); }
+
+        .container { padding: 120px 5% 100px; max-width: 800px; margin: 0 auto; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 2.5rem; margin-bottom: 40px; text-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 40px; border: 1px solid var(--border-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .catch { text-align: center; margin-bottom: 40px; padding: 20px; border: 1px solid #ff8e7f; border-radius: 8px; background: rgba(255, 142, 127, 0.05); }
-        .catch strong { display: block; font-size: 1.5rem; color: #ff8e7f; margin-bottom: 10px; }
-        .banner { width: 100%; margin-bottom: 20px; border: 1px solid var(--border-gold); }
+        
+        .catch {
+            padding: 20px; border: 1px solid var(--gold-light); border-radius: 8px;
+            background: rgba(212,175,55,0.1); margin-bottom: 40px;
+        }
+        .catch strong { display: block; font-size: 1.4rem; color: var(--gold-light); margin-bottom: 10px; }
+        
+        .banner { width: 100%; margin-bottom: 20px; border: 1px solid var(--border-gold); border-radius: 4px; }
+        
         table { width: 100%; border-collapse: collapse; margin-bottom: 50px; border-top: 1px solid var(--border-gold); }
         th, td { padding: 20px; border-bottom: 1px solid var(--border-gold); text-align: left; }
-        th { color: var(--gold-light); width: 30%; }
-        .contact { background: rgba(230, 197, 133, 0.05); border: 1px solid var(--gold-light); padding: 50px; text-align: center; border-radius: 10px; }
-        .btn { display: block; width: 100%; max-width: 400px; margin: 15px auto; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        th { color: var(--gold-light); width: 30%; font-weight: bold; }
+        
+        .contact {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--gold-main);
+            padding: 50px; border-radius: 10px;
+        }
+        .btn {
+            display: block; width: 100%; max-width: 400px; margin: 15px auto; padding: 18px;
+            border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s;
+        }
         .btn-insta { background: linear-gradient(135deg, #f09433, #bc1888); color: #fff; }
         .btn-tel { background: #fff; color: #000; }
-        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        footer { text-align: center; padding: 50px; color: #666; font-size: 0.8rem; margin-top: 50px; }
+        .btn:hover { transform: translateY(-3px); opacity: 0.9; }
+        
+        footer { text-align: center; padding: 50px; color: #666; font-size: 0.8rem; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
@@ -52,7 +73,7 @@
         <h1>RECRUIT</h1>
         <div class="video-box"><iframe src="https://www.youtube.com/embed/JcRGEUEaVuk" frameborder="0" allowfullscreen></iframe></div>
         <div class="catch">
-            <strong>藤井寺市野中 ★ 未経験歓迎♪</strong>
+            <strong>藤井寺市野中 ★ 未経験歓迎</strong>
             ノルマなしで気軽に働ける ☆ 全額日払いOK
         </div>
         <img src="recruit_counter.jpg" alt="未経験歓迎" class="banner">
@@ -65,7 +86,7 @@
             <tr><th>勤務地</th><td>大阪府藤井寺市野中1-262-5</td></tr>
         </table>
         <div class="contact">
-            <h2>CONTACT US</h2>
+            <h2 style="font-family:'Cinzel',serif;color:var(--gold-light);margin-bottom:30px;">CONTACT US</h2>
             <p style="margin-bottom:30px;color:#ccc;">「ホームページ・インスタを見た」とお伝えください</p>
             <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn btn-insta">Instagram DMで応募</a>
             <p style="margin-top:30px;font-size:1.5rem;color:var(--gold-light);">080-7992-7937</p>
