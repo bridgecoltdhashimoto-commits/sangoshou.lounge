@@ -2,66 +2,67 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruit | Lounge 珊瑚礁</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Recruit | LOUNGE 珊瑚礁</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #02050a; --gold-light: #e6c585; --gold-main: #d4af37;
-            --glass: rgba(255, 255, 255, 0.02); --border: rgba(212, 175, 55, 0.2);
+            --border: rgba(212, 175, 55, 0.2);
         }
-        body {
-            margin: 0; background-color: var(--bg-deep); color: #fff; font-family: 'Shippori Mincho', serif;
-            background-image: radial-gradient(circle at 50% 10%, #151e33 0%, #000 100%);
-            min-height: 100vh; overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg-deep); color: #fff; font-family: 'Shippori Mincho', serif; }
+
+        body { background-image: radial-gradient(circle at 50% 10%, #151e33 0%, #000 100%); }
+
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 25px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2,5,10,0.9); border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            background: rgba(2,5,10,0.92); border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
         }
-        .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.15em; }
-        nav { display: flex; gap: 25px; }
-        nav a { color: #aaa; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; }
-        nav a:hover, nav a.active { color: var(--gold-light); }
+        .brand { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.15em; }
+        nav { display: flex; gap: 20px; }
+        nav a { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; }
+        nav a.active { color: var(--gold-light); }
 
-        .container { padding: 180px 5% 100px; max-width: 900px; margin: 0 auto; }
-        h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 60px; text-align: center; }
+        .container { padding: 150px 5% 80px; max-width: 850px; margin: 0 auto; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 50px; text-align: center; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s all ease; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: 1.5s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 60px;
-            border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        .video-box {
+            position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 50px;
+            border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .message-box {
-            text-align: center; border: 1px solid var(--gold-main); padding: 40px;
-            background: rgba(212,175,55,0.03); margin-bottom: 80px;
+        .message {
+            text-align: center; border: 1px solid var(--gold-main); padding: 40px 20px;
+            background: rgba(212,175,55,0.03); margin-bottom: 60px;
         }
-        .message-box strong { display: block; font-size: 1.4rem; color: var(--gold-light); margin-bottom: 15px; }
+        .message strong { display: block; font-size: 1.3rem; color: var(--gold-light); margin-bottom: 15px; }
         
-        .recruit-table { width: 100%; border-collapse: collapse; margin-bottom: 80px; border-top: 1px solid var(--border); }
-        .recruit-table th, .recruit-table td { padding: 30px 20px; border-bottom: 1px solid var(--border); text-align: left; }
-        .recruit-table th { color: var(--gold-light); width: 30%; font-size: 0.9rem; letter-spacing: 0.2em; }
-        .recruit-table td { color: #ccc; font-size: 1rem; line-height: 2; }
+        /* レスポンシブテーブル */
+        .table { width: 100%; border-collapse: collapse; margin-bottom: 60px; border-top: 1px solid var(--border); }
+        .table th, .table td { padding: 25px 15px; border-bottom: 1px solid var(--border); text-align: left; }
+        .table th { color: var(--gold-light); width: 25%; font-size: 0.85rem; letter-spacing: 0.1em; }
+        .table td { color: #ccc; font-size: 0.95rem; line-height: 1.8; }
 
-        .apply-area { background: var(--glass); border: 1px solid var(--gold-main); padding: 60px 40px; text-align: center; }
-        .btn-apply {
-            display: block; width: 100%; max-width: 400px; margin: 20px auto; padding: 20px;
-            border-radius: 2px; text-decoration: none; font-weight: bold; letter-spacing: 0.1em; transition: 0.4s;
+        .entry-box { background: rgba(255,255,255,0.02); border: 1px solid var(--gold-main); padding: 50px 30px; text-align: center; }
+        .btn-entry {
+            display: block; width: 100%; max-width: 380px; margin: 15px auto; padding: 18px;
+            border-radius: 2px; text-decoration: none; font-weight: 700; letter-spacing: 0.1em; transition: 0.4s;
         }
         .btn-insta { background: linear-gradient(135deg, #f09433, #bc1888); color: #fff; }
         .btn-tel { background: #fff; color: #000; }
-        .btn-apply:hover { transform: translateY(-3px); opacity: 0.9; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .btn-entry:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            .container { padding-top: 160px; }
-            .recruit-table th, .recruit-table td { display: block; width: 100%; padding: 15px 0; }
-            .recruit-table th { border: none; }
+            header { flex-direction: column; gap: 15px; padding: 15px; }
+            .container { padding-top: 150px; }
+            .table th, .table td { display: block; width: 100%; padding: 15px 5px; }
+            .table th { border: none; padding-bottom: 0; color: var(--gold-main); }
         }
     </style>
 </head>
@@ -78,28 +79,28 @@
     <div class="container">
         <h1 class="reveal">RECRUIT</h1>
 
-        <div class="video-container reveal">
+        <div class="video-box reveal">
             <iframe src="https://www.youtube.com/embed/JcRGEUEaVuk" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <div class="message-box reveal">
+        <div class="message reveal">
             <strong>藤井寺で、一番の輝きを。</strong>
-            <p>未経験の方も、丁寧な研修でプロへ。<br>ラグジュアリーな空間で、あなたらしく輝いてください。</p>
+            <p>未経験の方も、丁寧なサポートで安心。<br>ラグジュアリーな空間で、自分らしく輝きませんか。</p>
         </div>
 
-        <table class="recruit-table reveal">
+        <table class="table reveal">
             <tr><th>POSITION</th><td>カウンターレディ</td></tr>
-            <tr><th>SALARY</th><td>時給 2,000円 ～<br><span style="font-size:0.8rem;">※各種バック制度、随時昇給あり</span></td></tr>
-            <tr><th>TIME</th><td>20:30 ～ 25:00<br><span style="font-size:0.8rem;">※週1回〜、短時間勤務も応相談</span></td></tr>
-            <tr><th>BENEFITS</th><td>全額日払い可 / 無料送迎（専属） / 貸衣装完備 / ノルマ・罰金なし</td></tr>
+            <tr><th>SALARY</th><td>時給 2,000円 ～<br><span style="font-size:0.8rem; opacity:0.7;">※各種手当、随時昇給あり</span></td></tr>
+            <tr><th>TIME</th><td>20:30 ～ 25:00<br><span style="font-size:0.8rem; opacity:0.7;">※週1回〜、短時間勤務も応相談</span></td></tr>
+            <tr><th>BENEFITS</th><td>全額日払い可 / 無料送迎あり / 貸衣装完備 / ノルマ・罰金なし</td></tr>
         </table>
 
-        <div class="apply-area reveal">
-            <h2 style="font-family:'Cinzel',serif; color:var(--gold-light); margin-bottom:30px; letter-spacing:0.2em;">ENTRY</h2>
-            <p style="margin-bottom:30px; color:#888;">24時間、ご質問のみでも受け付けております。</p>
-            <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-apply btn-insta">INSTAGRAM DM</a>
-            <p style="margin-top:30px; font-family:'Cinzel',serif; font-size:1.5rem; color:var(--gold-light);">080-7992-7937</p>
-            <a href="tel:08079927937" class="btn-apply btn-tel">DIRECT CALL</a>
+        <div class="entry-box reveal">
+            <h2 style="font-family:'Cinzel',serif; color:var(--gold-light); margin-bottom:25px; letter-spacing:0.2em;">ENTRY</h2>
+            <p style="margin-bottom:30px; color:#888; font-size:0.9rem;">24時間、ご質問のみでも承っております。</p>
+            <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-entry btn-insta">INSTAGRAM DM</a>
+            <p style="margin-top:30px; font-family:'Cinzel',serif; font-size:1.6rem; color:var(--gold-light);">080-7992-7937</p>
+            <a href="tel:08079927937" class="btn-entry btn-tel">DIRECT CALL</a>
         </div>
     </div>
 
@@ -107,11 +108,9 @@
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+                var wh = window.innerHeight;
+                var top = reveals[i].getBoundingClientRect().top;
+                if (top < wh - 80) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
