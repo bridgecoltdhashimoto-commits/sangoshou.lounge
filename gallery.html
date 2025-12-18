@@ -4,98 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Lounge 珊瑚礁</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #050810; --text-main: #f0f0f0; --gold-light: #f3e5ab; --gold-main: #d4af37;
-            --glass-bg: rgba(20, 25, 40, 0.7); --border-gold: rgba(212, 175, 55, 0.4);
+            --bg-deep: #02050a; --gold-light: #e6c585; --gold-main: #d4af37;
+            --glass: rgba(255, 255, 255, 0.02); --border: rgba(212, 175, 55, 0.2);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Shippori Mincho', serif;
-            background-color: var(--bg-deep); color: var(--text-main);
-            background-image: radial-gradient(circle at 50% 10%, #0f1c30 0%, #000 90%);
+            margin: 0; background-color: var(--bg-deep); color: #fff; font-family: 'Shippori Mincho', serif;
+            background-image: radial-gradient(circle at 50% 10%, #0d1629 0%, #000 100%);
             min-height: 100vh; overflow-x: hidden;
         }
-
-        /* ヘッダー（はみ出し防止・自動折り返し対応） */
         header {
-            position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
-            padding: 15px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; /* 重要：画面幅が足りない時に折り返す設定 */
-            background: linear-gradient(to bottom, rgba(5,8,16,0.95), rgba(5,8,16,0.9));
-            border-bottom: 1px solid rgba(212,175,55,0.3);
-            transition: 0.3s;
+            background: rgba(2,5,10,0.9); border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
         }
-        .brand {
-            font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 0.1em;
-            background: linear-gradient(to right, #fff, var(--gold-main), #fff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            white-space: nowrap; margin-right: auto; /* ロゴを左寄せ維持 */
-        }
-        nav {
-            display: flex; gap: 20px;
-            flex-wrap: wrap; /* メニュー自体も折り返し可能に */
-            justify-content: center;
-        }
-        nav a {
-            color: #ccc; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em;
-            transition: 0.3s; white-space: nowrap; display: inline-block;
-        }
-        nav a:hover, nav a.active { color: var(--gold-light); text-shadow: 0 0 8px var(--gold-main); }
+        .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.15em; }
+        nav { display: flex; gap: 25px; }
+        nav a { color: #aaa; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: 0.4s; }
+        nav a:hover, nav a.active { color: var(--gold-light); }
 
-        /* コンテンツ */
-        .container { padding: 160px 5% 100px; max-width: 1200px; margin: 0 auto; text-align: center; }
-        
-        h1 {
-            font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 10px;
-            background: linear-gradient(to right, var(--gold-light), var(--gold-main));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        p { color: #aaa; margin-bottom: 50px; letter-spacing: 0.1em; font-size: 0.9rem; }
+        .container { padding: 180px 5% 100px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 10px; }
+        .sub-head { color: #888; font-size: 0.9rem; letter-spacing: 0.2em; margin-bottom: 80px; }
 
-        /* グリッド */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px; width: 100%;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; width: 100%;
         }
-        .photo {
-            background: var(--glass-bg); border: 1px solid var(--border-gold); padding: 8px;
-            transition: 0.5s; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-radius: 4px;
+        .photo-item {
+            background: var(--glass); border: 1px solid var(--border); padding: 12px;
+            transition: 0.6s; position: relative;
         }
-        .photo:hover {
-            border-color: var(--gold-light); transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(212,175,55,0.4);
-        }
-        .photo img {
-            width: 100%; height: 250px; object-fit: cover; display: block;
-            transition: 0.5s; filter: brightness(0.9);
-        }
-        .photo:hover img { filter: brightness(1.1); transform: scale(1.02); }
+        .photo-item:hover { border-color: var(--gold-light); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .photo-item img { width: 100%; height: 400px; object-fit: cover; transition: 0.8s; filter: brightness(0.85); }
+        .photo-item:hover img { filter: brightness(1.1); transform: scale(1.02); }
 
         .btn-insta {
-            display: inline-block; margin-top: 60px; padding: 16px 50px;
-            border: 1px solid var(--gold-light); color: var(--gold-light);
-            text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 0.1em;
-            transition: 0.3s; background: rgba(212,175,55,0.05);
+            display: inline-block; margin-top: 100px; padding: 18px 60px;
+            border: 1px solid #fff; color: #fff; text-decoration: none;
+            font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.2em; transition: 0.4s;
         }
-        .btn-insta:hover { background: var(--gold-light); color: #000; box-shadow: 0 0 20px var(--gold-light); }
+        .btn-insta:hover { background: #fff; color: #000; box-shadow: 0 0 30px #fff; }
 
-        footer { text-align: center; padding: 50px; color: #666; font-size: 0.8rem; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); }
-
-        /* 幅が狭くなった時の調整 */
-        @media (max-width: 950px) {
-            header { justify-content: center; gap: 15px; }
-            .brand { margin-right: 0; margin-bottom: 10px; width: 100%; text-align: center; }
-            nav { width: 100%; justify-content: center; }
-            .container { padding-top: 180px; }
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .container { padding-top: 160px; }
+            .grid { grid-template-columns: 1fr; }
+            .photo-item img { height: 300px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="brand">Lounge <span>珊瑚礁</span></div>
+        <a href="index.html" class="brand">LOUNGE 珊瑚礁</a>
         <nav>
             <a href="index.html">Home</a>
             <a href="gallery.html" class="active">Gallery</a>
@@ -104,17 +70,33 @@
     </header>
 
     <div class="container">
-        <h1>ATMOSPHERE</h1>
-        <p>宝石のような輝きと、癒やしの時間</p>
+        <h1 class="reveal">ATMOSPHERE</h1>
+        <p class="sub-head reveal">深海の煌めきと、至高の空間</p>
+
         <div class="grid">
-            <div class="photo"><img src="counter_main.jpg" alt="店内の様子"></div>
-            <div class="photo"><img src="bottles.jpg" alt="ボトル"></div>
-            <div class="photo"><img src="counter_side.jpg" alt="カウンター"></div>
-            <div class="photo"><img src="signboard.jpg" alt="看板"></div>
-            <div class="photo"><img src="cast_girls.jpg" alt="キャスト"></div>
+            <div class="photo-item reveal"><img src="counter_main.jpg" alt="Atmosphere 1"></div>
+            <div class="photo-item reveal"><img src="bottles.jpg" alt="Atmosphere 2"></div>
+            <div class="photo-item reveal"><img src="counter_side.jpg" alt="Atmosphere 3"></div>
+            <div class="photo-item reveal"><img src="signboard.jpg" alt="Atmosphere 4"></div>
+            <div class="photo-item reveal"><img src="cast_girls.jpg" alt="Atmosphere 5"></div>
         </div>
-        <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-insta">VISIT INSTAGRAM</a>
+
+        <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-insta reveal">OFFICIAL INSTAGRAM</a>
     </div>
-    <footer><p>© 2025 Lounge Sangosho.</p></footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
 </body>
 </html>
