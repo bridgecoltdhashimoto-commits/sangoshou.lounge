@@ -2,60 +2,61 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Lounge 珊瑚礁</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gallery | LOUNGE 珊瑚礁</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #02050a; --gold-light: #e6c585; --gold-main: #d4af37;
-            --glass: rgba(255, 255, 255, 0.02); --border: rgba(212, 175, 55, 0.2);
+            --border: rgba(212, 175, 55, 0.2);
         }
-        body {
-            margin: 0; background-color: var(--bg-deep); color: #fff; font-family: 'Shippori Mincho', serif;
-            background-image: radial-gradient(circle at 50% 10%, #0d1629 0%, #000 100%);
-            min-height: 100vh; overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg-deep); color: #fff; font-family: 'Shippori Mincho', serif; }
+
+        body { background-image: radial-gradient(circle at 50% 10%, #0d1629 0%, #000 100%); }
+
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 25px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2,5,10,0.9); border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            background: rgba(2,5,10,0.92); border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
         }
-        .brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.15em; }
-        nav { display: flex; gap: 25px; }
-        nav a { color: #aaa; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: 0.4s; }
-        nav a:hover, nav a.active { color: var(--gold-light); }
+        .brand { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.15em; }
+        nav { display: flex; gap: 20px; }
+        nav a { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: 0.4s; }
+        nav a.active { color: var(--gold-light); }
 
-        .container { padding: 180px 5% 100px; max-width: 1200px; margin: 0 auto; text-align: center; }
-        h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 10px; }
-        .sub-head { color: #888; font-size: 0.9rem; letter-spacing: 0.2em; margin-bottom: 80px; }
+        .container { padding: 150px 5% 80px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold-light); letter-spacing: 0.3em; margin-bottom: 10px; }
+        .sub-head { color: #666; font-size: 0.85rem; letter-spacing: 0.2em; margin-bottom: 60px; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s all ease; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: 1.5s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* はみ出し防止：グリッド設計 */
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px; width: 100%;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+            gap: 30px; width: 100%;
         }
-        .photo-item {
-            background: var(--glass); border: 1px solid var(--border); padding: 12px;
-            transition: 0.6s; position: relative;
+        .photo-box {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 10px;
+            transition: 0.6s; position: relative; overflow: hidden;
         }
-        .photo-item:hover { border-color: var(--gold-light); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-        .photo-item img { width: 100%; height: 400px; object-fit: cover; transition: 0.8s; filter: brightness(0.85); }
-        .photo-item:hover img { filter: brightness(1.1); transform: scale(1.02); }
+        .photo-box:hover { border-color: var(--gold-light); box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
+        .photo-box img { width: 100%; height: 350px; object-fit: cover; transition: 0.8s; filter: brightness(0.8); }
+        .photo-box:hover img { filter: brightness(1.05); transform: scale(1.03); }
 
         .btn-insta {
-            display: inline-block; margin-top: 100px; padding: 18px 60px;
+            display: inline-block; margin-top: 80px; padding: 18px 50px;
             border: 1px solid #fff; color: #fff; text-decoration: none;
-            font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.2em; transition: 0.4s;
+            font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.2em; transition: 0.4s;
         }
-        .btn-insta:hover { background: #fff; color: #000; box-shadow: 0 0 30px #fff; }
+        .btn-insta:hover { background: #fff; color: #000; }
 
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            .container { padding-top: 160px; }
-            .grid { grid-template-columns: 1fr; }
-            .photo-item img { height: 300px; }
+        @media (max-width: 950px) {
+            header { flex-direction: column; gap: 15px; padding: 15px; }
+            .container { padding-top: 150px; }
+            .photo-box img { height: 280px; }
         }
     </style>
 </head>
@@ -74,11 +75,11 @@
         <p class="sub-head reveal">深海の煌めきと、至高の空間</p>
 
         <div class="grid">
-            <div class="photo-item reveal"><img src="counter_main.jpg" alt="Atmosphere 1"></div>
-            <div class="photo-item reveal"><img src="bottles.jpg" alt="Atmosphere 2"></div>
-            <div class="photo-item reveal"><img src="counter_side.jpg" alt="Atmosphere 3"></div>
-            <div class="photo-item reveal"><img src="signboard.jpg" alt="Atmosphere 4"></div>
-            <div class="photo-item reveal"><img src="cast_girls.jpg" alt="Atmosphere 5"></div>
+            <div class="photo-box reveal"><img src="counter_main.jpg" alt="Interior 1"></div>
+            <div class="photo-box reveal"><img src="bottles.jpg" alt="Interior 2"></div>
+            <div class="photo-box reveal"><img src="counter_side.jpg" alt="Interior 3"></div>
+            <div class="photo-box reveal"><img src="signboard.jpg" alt="Sign"></div>
+            <div class="photo-box reveal"><img src="cast_girls.jpg" alt="Staff"></div>
         </div>
 
         <a href="https://www.instagram.com/sangoshou_nonaka/" target="_blank" class="btn-insta reveal">OFFICIAL INSTAGRAM</a>
@@ -88,11 +89,9 @@
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+                var wh = window.innerHeight;
+                var top = reveals[i].getBoundingClientRect().top;
+                if (top < wh - 80) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
